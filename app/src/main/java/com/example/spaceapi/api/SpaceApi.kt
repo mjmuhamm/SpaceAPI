@@ -7,11 +7,8 @@ import retrofit2.http.Query
 
 interface SpaceApi {
     @GET("articles")
-    suspend fun getInfo() : SpaceResponse
+    suspend fun getInfo(@Query("format") format: String = "json") : SpaceResponse
 }
 
-interface SecondPageApi {
-    @GET("articles/{id}")
-    suspend fun getInfo(@Query("id") id: String): SecondResponse
-}
+
 

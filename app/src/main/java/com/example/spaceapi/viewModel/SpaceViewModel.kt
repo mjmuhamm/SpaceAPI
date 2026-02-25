@@ -12,11 +12,10 @@ class SpaceViewModel(private val repository: SpaceRepository = SpaceRepository()
     private val _spaceState = MutableLiveData<SpaceState>(SpaceState.Loading)
     val spaceState = _spaceState
 
-    private val _secondState = MutableLiveData<SecondState>(SecondState.Loading)
-    val secondState = _secondState
 
-
-
+init {
+    getInfo()
+}
 
     fun getInfo() {
         viewModelScope.launch {
@@ -31,20 +30,5 @@ class SpaceViewModel(private val repository: SpaceRepository = SpaceRepository()
         }
     }
 
-    fun secondPage(id: String) {
-        viewModelScope.launch {
-            _secondState.value = SecondState.Loading
-            val result = repository.getSecondPageInfo(id)
-            _secondState.value = if (result.isSuccess) {
-                val info = result.getOrNull()
-                if (info != null) {
-                    SecondState.Success(info)  // pass the actual response
-                } else {
-                    SecondState.Error(result.exceptionOrNull()?.message ?: "Unknown Error")
-                }
-            } else {
-                SecondState.Error(result.exceptionOrNull()?.message ?: "Unknown Error")
-            }
-        }
-    }
+
 }

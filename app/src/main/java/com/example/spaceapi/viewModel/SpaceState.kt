@@ -9,8 +9,3 @@ sealed class SpaceState {
     data class Error(val message: String): SpaceState()
 }
 
-sealed class SecondState {
-    object Loading: SecondState()
-    data class Success(val data: SecondResponse): SecondState()
-    data class Error(val message: String): SecondState()
-}
