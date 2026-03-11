@@ -1,6 +1,6 @@
 package com.example.spaceapi.api
 
-import com.example.spaceapi.model.secondPage.SecondResponse
+import com.example.spaceapi.model.SecondResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

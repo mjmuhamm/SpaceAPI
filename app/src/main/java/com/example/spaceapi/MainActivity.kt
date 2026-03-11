@@ -40,17 +40,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.spaceapi.model.firstPage.Result
+import com.example.spaceapi.model.Result
 import com.example.spaceapi.ui.theme.SpaceAPITheme
-import com.example.spaceapi.viewModel.SecondState
-import com.example.spaceapi.viewModel.SecondViewModel
+import com.example.spaceapi.viewModel.SecondPageState
+import com.example.spaceapi.viewModel.SecondPageViewModel
 import com.example.spaceapi.viewModel.SpaceState
 import com.example.spaceapi.viewModel.SpaceViewModel
 
 class MainActivity : ComponentActivity() {
 
     private val viewModel: SpaceViewModel by viewModels()
-    private val viewModel2: SecondViewModel by viewModels()
+    private val viewModel2: SecondPageViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Home(viewModel: SpaceViewModel, viewModel2: SecondViewModel, modifier: Modifier = Modifier) {
+fun Home(viewModel: SpaceViewModel, viewModel2: SecondPageViewModel, modifier: Modifier = Modifier) {
     var currentScreen by rememberSaveable() { mutableStateOf(true) }
     var passingId by rememberSaveable { mutableStateOf("") }
 
@@ -146,18 +146,18 @@ fun SpaceItems(info: Result, onNavigate: (String) -> Unit = {}) {
 
 
 @Composable
-fun SecondPage(id: String, viewModel: SecondViewModel, onNavigate: () -> Unit = {}) {
+fun SecondPage(id: String, viewModel: SecondPageViewModel, onNavigate: () -> Unit = {}) {
 
     LaunchedEffect(id) {
         viewModel.secondPage(id)
     }
 
-    val state by viewModel.secondState.observeAsState(SecondState.Loading)
+    val state by viewModel.secondState.observeAsState(SecondPageState.Loading)
     when (state) {
-        is SecondState.Loading -> CircularProgressIndicator()
+        is SecondPageState.Loading -> CircularProgressIndicator()
 
-        is SecondState.Success -> {
-            val info = (state as SecondState.Success).data
+        is SecondPageState.Success -> {
+            val info = (state as SecondPageState.Success).data
             Column(modifier = Modifier
                 .fillMaxSize()
                 .background(Color.White)) {
@@ -239,11 +239,11 @@ fun SecondPage(id: String, viewModel: SecondViewModel, onNavigate: () -> Unit = 
             }
         }
 
-        is SecondState.Error -> {
+        is SecondPageState.Error -> {
             Column() {
                 Text("Id passed: $id", modifier = Modifier.padding(30.dp))
                 Text(
-                    "Error loading second page: ${(state as SecondState.Error).message}",
+                    "Error loading second page: ${(state as SecondPageState.Error).message}",
                     modifier = Modifier.padding(30.dp)
                 )
             }

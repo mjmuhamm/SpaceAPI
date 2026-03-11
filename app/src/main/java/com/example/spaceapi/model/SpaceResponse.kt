@@ -1,4 +1,12 @@
-package com.example.spaceapi.model.secondPage
+package com.example.spaceapi.model
+
+
+data class SpaceResponse(
+    val count: Int,
+    val next: String,
+    val previous: Any,
+    val results: List<Result>
+)
 
 data class SecondResponse(
     val authors: List<Author>,

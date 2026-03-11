@@ -3,7 +3,6 @@ package com.example.spaceapi.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.spaceapi.model.secondPage.SecondResponse
 import com.example.spaceapi.repository.SpaceRepository
 import kotlinx.coroutines.launch
 
@@ -11,7 +10,6 @@ class SpaceViewModel(private val repository: SpaceRepository = SpaceRepository()
 
     private val _spaceState = MutableLiveData<SpaceState>(SpaceState.Loading)
     val spaceState = _spaceState
-
 
 init {
     getInfo()
@@ -29,6 +27,5 @@ init {
             }
         }
     }
-
-
 }
+

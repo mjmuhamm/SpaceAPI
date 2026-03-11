@@ -1,6 +1,5 @@
 package com.example.spaceapi.repository
 
-import com.example.spaceapi.api.SecondPageApi
 import com.example.spaceapi.api.SpaceApi
 import com.example.spaceapi.remote.RetrofitClient
 import kotlinx.coroutines.Dispatchers
@@ -8,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 class SpaceRepository(private var api: SpaceApi = RetrofitClient.api) {
 
-    suspend fun getInfo(): Result<List<com.example.spaceapi.model.firstPage.Result>> = withContext(Dispatchers.IO) {
+    suspend fun getInfo(): Result<List<com.example.spaceapi.model.Result>> = withContext(Dispatchers.IO) {
 
         try {
             val response = api.getInfo()
@@ -18,6 +17,7 @@ class SpaceRepository(private var api: SpaceApi = RetrofitClient.api) {
             Result.failure(e)
         }
     }
-
-
 }
+
+
+

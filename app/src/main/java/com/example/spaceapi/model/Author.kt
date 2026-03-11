@@ -1,4 +1,4 @@
-package com.example.spaceapi.model.firstPage
+package com.example.spaceapi.model
 
 data class Author(
     val name: String,
